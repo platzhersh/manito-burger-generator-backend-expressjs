@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express()
+const app = express();
 
-app.get('/', (req, res) => res.send('Hello World! (Try /ingredients)'));
+app.get('/', (req, res) => res.send('Manito Burger Generator Backend!'));
 
 const primaryIngredients = [
       { name: 'Rindfleisch', price: 7.50 },
@@ -34,6 +34,23 @@ const sauces = [
       { name: 'Ketchup', price: 1.0 }
    ];
 
+const classicBurger = {
+  name: 'Classic Burger',
+  fixedPrice: 12,
+  ingredients: {
+      primary: [{ name: 'Rindfleisch', price: 7.50 }],
+      secondary: [
+          { name: 'Salat', price: null },
+          { name: 'Tomaten', price: null },
+          { name: 'Zwiebeln', price: null },
+          { name: 'Hausgemachte Mayo', price: null }],
+  }
+};
+
+app.get('/burgers', function(request, response) {
+   response.json(200, [classicBurger]);
+});
+
 app.get('/ingredients/primary', function(request, response) {
     response.json(200, primaryIngredients);
 });
@@ -54,4 +71,4 @@ app.get('/ingredients', function(request, response) {
    });
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3001, () => console.log('Example app listening on port 3000!'))
